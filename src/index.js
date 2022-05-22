@@ -1,9 +1,26 @@
 import "./style.css";
 import { domManipulation } from "./domManipulation";
+import {todayForecast} from "./todayForecast";
 let lon;
 let lat;
 let city = "London";
 let temperature;
+let searchValue;
+
+let searchButton = document.querySelector(".search");
+searchButton.addEventListener("click", function () {
+  searchValue = document.querySelector(".searchValue").value;
+  console.log(searchValue);
+
+  if (searchValue === "") {
+    city = "London";
+    fetchWeather();
+  } else {
+    city = searchValue;
+    fetchWeather();
+  }
+});
+
 async function fetchWeather() {
   const response = await fetch(
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -13,17 +30,17 @@ async function fetchWeather() {
   );
   const data = await response.json();
   console.log(data);
-  temperature = data.main.temp;
   lon = data.coord.lon;
   lat = data.coord.lat;
-  console.log(temperature);
-  dailyForecast(lat, lon);
-  domManipulation.actualTemperature(temperature);
+  dailyForecastFetching(lat, lon);
+
+  domManipulation.cityNameChange(data.name);
+  domManipulation.actualTemperature(data.main.temp);
+  domManipulation.status(data.weather[0].main);
 }
 fetchWeather();
-domManipulation.cityNameChange(city);
 
-async function dailyForecast(lat, lon) {
+async function dailyForecastFetching(lat, lon) {
   const response = await fetch(
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
       lat +
@@ -34,4 +51,8 @@ async function dailyForecast(lat, lon) {
   );
   const data = await response.json();
   console.log(data);
+  domManipulation.createHourBox(data);
+  let hourlyForecast =  data.hourly;
+  console.log(hourlyForecast)
 }
+
