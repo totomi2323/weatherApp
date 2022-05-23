@@ -1,3 +1,5 @@
+import { weatherBackground } from "./weatherBackground";
+
 const todayForecast = (() => {
     const timeToHour =  (unixTime) => {
         let date = new Date(unixTime * 1000);
@@ -27,6 +29,7 @@ const todayForecast = (() => {
     
         for (i; i <= 11; i++) {
           let temp = data.hourly[i].temp;
+          temp = Math.round(temp * 10) / 10;
           let unixTime = data.hourly[i].dt;
           let timezoneOffset = data.timezone_offset;
           unixTime = unixTime + timezoneOffset;
@@ -37,17 +40,21 @@ const todayForecast = (() => {
           hourlyBox.classList.add("hourlyBox");
           let temperateBox = document.createElement("div");
           let timeBox = document.createElement("div");
+          let statusPicture = document.createElement("img");
           let statusBox = document.createElement("div");
     
     
           hourlyBox.style.backgroundImage 
           temperateBox.textContent = temp + "C";
           timeBox.textContent = time;
+          statusPicture.src = weatherBackground.displayStatus(status);
+          statusPicture.classList.add("statusPicture");
           statusBox.textContent = status;
     
           hourlyForecastContainer.appendChild(hourlyBox);
           hourlyBox.appendChild(temperateBox);
           hourlyBox.appendChild(timeBox);
+          hourlyBox.appendChild(statusPicture);
           hourlyBox.appendChild(statusBox);
         }
       };

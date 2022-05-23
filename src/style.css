@@ -6,16 +6,38 @@ body {
 }
 
 .todayWeatherContainer {
-    border: 4px solid black;
-    border-radius: 10px;
-    width : 98%;
-    height: 500px;
+    display:  flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px 0;
 }
-
+#actualPics {
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+}
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 30px auto;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 3px solid lightgray;
+    border-radius: 20px;
+    background-color: white;
+}
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+}
 
 .hourlyForecastContainer , .dailyForecastContainer{
     display: flex;
-    border: 4px solid red;
     border-radius: 10px;
     width : 98%;
     height: 250px;
@@ -30,6 +52,14 @@ body {
     border-radius: 10px;
     width : 200px;
     background-position: center;
+    background-color: azure;
 }
 
-
+.statusPicture {
+    width: 100px;
+    height: 100px;
+}
+button {
+    padding : 5px 10px;
+    border-radius: 10px;
+}

@@ -1,5 +1,5 @@
 import "./style.css";
-import { domManipulation } from "./domManipulation";
+import { actualWeather } from "./domManipulation";
 import {dailyForecast} from "./dailyForecast";
 import { todayForecast } from "./todayForecast";
 
@@ -37,9 +37,7 @@ async function fetchWeather() {
   lat = data.coord.lat;
   dailyForecastFetching(lat, lon);
 
-  domManipulation.cityNameChange(data.name);
-  domManipulation.actualTemperature(data.main.temp);
-  domManipulation.status(data.weather[0].main);
+ actualWeather.displayActualWeather(data);
 }
 fetchWeather();
 

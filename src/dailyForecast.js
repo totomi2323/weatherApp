@@ -1,3 +1,5 @@
+import { weatherBackground } from "./weatherBackground";
+
 const dailyForecast = (() => {
     const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const timeToDay =  (unixTime) => {
@@ -26,8 +28,10 @@ const dailyForecast = (() => {
         let i = 0;
     
         for (i; i <= 6; i++) {
-          let tempDay = data.daily[i].temp.day;
+          let tempDay = data.daily[i].temp.day
+          tempDay = Math.round(tempDay * 10) / 10;
           let tempNight = data.daily[i].temp.night;
+          tempNight = Math.round(tempNight * 10) / 10;
           let unixTime = data.daily[i].dt;
           let timezoneOffset = data.timezone_offset;
           unixTime = unixTime + timezoneOffset;
@@ -39,6 +43,7 @@ const dailyForecast = (() => {
           let temperateBoxDay = document.createElement("div");
           let temperateBoxNight = document.createElement("div");
           let timeBox = document.createElement("div");
+          let statusPicture = document.createElement("img");
           let statusBox = document.createElement("div");
     
     
@@ -46,12 +51,15 @@ const dailyForecast = (() => {
           temperateBoxDay.textContent = "Day: " + tempDay + "C";
           temperateBoxNight.textContent = "Night: " +tempNight + "C";
           timeBox.textContent = time;
+          statusPicture.src = weatherBackground.displayStatus(status);
+          statusPicture.classList.add("statusPicture");
           statusBox.textContent = status;
     
           dailyForecastContainer.appendChild(dailyForecast);
           dailyForecast.appendChild(temperateBoxDay);
           dailyForecast.appendChild(temperateBoxNight);
           dailyForecast.appendChild(timeBox);
+          dailyForecast.appendChild(statusPicture);
           dailyForecast.appendChild(statusBox);
         }
       };

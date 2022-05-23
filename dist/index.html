@@ -8,19 +8,28 @@
   </head>
 
   <body>
-    <div class="searchContainer">
-      <input class="searchValue" type="text" />
-      <button class="search">Search</button>
-    </div>
     <div class="todayWeatherContainer">
-      <div class="cityName"></div>
+      <div class = "left">
+      <h2 class="cityName"></h2>
       <div class="temperature"></div>
       <div class="status"></div>
-      <div class="hourlyForecastContainer">
+    </div>
+    <img class = "statusPicture" id="actualPics"> 
+    <div class = "right">
+      <div class="minTemp"> </div>
+      <div class="maxTemp"></div>
+      <div class="time"></div>
+    </div>
+
+    </div>
+    <div class="hourlyForecastContainer"> </div>
+      <div class="searchContainer">
+        <span> Search: </span>
+        <input class="searchValue" type="text" />
+        <button type="submit" class="search">Search</button>
       </div>
-    </div>
-    <div class = "dailyForecastContainer">
-    </div>
+   
+    <div class="dailyForecastContainer"></div>
 
     <script src="main.js"></script>
   </body>
