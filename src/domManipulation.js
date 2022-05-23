@@ -1,6 +1,6 @@
-import { todayForecast } from "./todayForecast";
 
 const domManipulation = (() => {
+    
   const cityNameChange = (city) => {
     document.querySelector(".cityName").textContent = city;
   };
@@ -13,47 +13,7 @@ const domManipulation = (() => {
     document.querySelector(".status").textContent = status;
   };
 
-  const emptyHourlyContainer = (container) => {
-     let removes = document.querySelectorAll(".hourlyBox");
-     if (removes) {
-         removes.forEach((remove) => {
-             container.removeChild(remove);
-         })
-     }
-  }
-
-  const createHourBox = (data) => {
-    let hourlyForecastContainer = document.querySelector(
-      ".hourlyForecastContainer"
-    );  
-    emptyHourlyContainer(hourlyForecastContainer);
-   
-    let i = 0;
-
-    for (i; i <= 11; i++) {
-      let temp = data.hourly[i].temp;
-      let unixTime = data.hourly[i].dt ;
-      let timezoneOffset = data.timezone_offset;
-        unixTime = (unixTime) + timezoneOffset;
-      let time = todayForecast.timeToHour(unixTime)
-      let status = data.hourly[i].weather[0].main;
-
-      let hourlyBox = document.createElement("div");
-      hourlyBox.classList.add("hourlyBox");
-      let temperateBox = document.createElement("div");
-      let timeBox = document.createElement("div");
-      let statusBox = document.createElement("div");
-
-      temperateBox.textContent = temp + "C";
-      timeBox.textContent = time;
-      statusBox.textContent = status;
-
-      hourlyForecastContainer.appendChild(hourlyBox);
-      hourlyBox.appendChild(temperateBox);
-      hourlyBox.appendChild(timeBox);
-      hourlyBox.appendChild(statusBox);
-    }
-  };
-  return { cityNameChange, actualTemperature, status, createHourBox };
+  
+  return { cityNameChange, actualTemperature, status };
 })();
 export { domManipulation as domManipulation };

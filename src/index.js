@@ -1,11 +1,14 @@
 import "./style.css";
 import { domManipulation } from "./domManipulation";
-import {todayForecast} from "./todayForecast";
+import {dailyForecast} from "./dailyForecast";
+import { todayForecast } from "./todayForecast";
+
 let lon;
 let lat;
 let city = "London";
 let temperature;
 let searchValue;
+
 
 let searchButton = document.querySelector(".search");
 searchButton.addEventListener("click", function () {
@@ -51,8 +54,12 @@ async function dailyForecastFetching(lat, lon) {
   );
   const data = await response.json();
   console.log(data);
-  domManipulation.createHourBox(data);
-  let hourlyForecast =  data.hourly;
-  console.log(hourlyForecast)
+  todayForecast.createHourlyForecast(data);
+
+  let dailyForecastData = data.daily;
+  console.log(dailyForecastData);
+  let sg = dailyForecast.timeToDay(dailyForecastData[0].dt);
+  dailyForecast.createDailyForecast(data);
+  
 }
 
