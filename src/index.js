@@ -37,7 +37,7 @@ async function fetchWeather() {
   lat = data.coord.lat;
   dailyForecastFetching(lat, lon);
 
- actualWeather.displayActualWeather(data);
+  actualWeather.displayActualWeather(data);
 }
 fetchWeather();
 

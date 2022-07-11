@@ -15,13 +15,15 @@ const actualWeather = (() => {
     displayPics.src = weatherBackground.displayStatus(status);
   };
 
-  const timeToActual = (unixTime) => {
-    let date = new Date(unixTime * 1000);
+  const timeToActual = (unixTime, timeZone) => {
+    let localTime = unixTime + (timeZone) - 3600;
+    let date = new Date(localTime * 1000);
     let hours = date.getHours();
-    let minutes =  date.getMinutes();
-    let formattedTime = hours + ":" + minutes;
+    let minutes =  "0" + date.getMinutes();
+    let formattedTime = hours + ":" + minutes.substr(-2);
     let displayTime = document.querySelector(".time");
     displayTime.textContent = "Time: " + formattedTime;
+    console.log(formattedTime);
   };
 
   const minMaxTemperature = (min, max) => {
@@ -39,7 +41,7 @@ const actualWeather = (() => {
     temp = Math.round(temp * 10) / 10;
     actualTemperature(temp);
     status(data.weather[0].main);
-    timeToActual(data.dt);
+    timeToActual(data.dt, data.timezone);
     minMaxTemperature(data.main.temp_min, data.main.temp_max);
   };
 
